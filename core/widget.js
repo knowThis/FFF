@@ -1,4 +1,4 @@
-define(['base'], function(Base) {
+define(['base','FFF'], function(Base,FFF) {
 
 
 	function Widget(){
@@ -35,6 +35,6 @@ define(['base'], function(Base) {
 		"boundingBox":undefined
 	}
 
-	return Widget;
+	return FFF.core.extend(Widget,Base);
 
 });
