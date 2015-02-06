@@ -8,17 +8,42 @@ define(['FFF'], function(FFF) {
         this.__initAttr();
     }
 
+    /**
+     * 初始化所有属性 ATTRS
+     * 注：如果extend中做过类属性的继承，那么此处将要改动
+     */
     Attribute.prototype.__initAttr = function() {
-        var attrs = this.constructor.ATTRS || {};
+        var attrs = mergeATTRS(this.constructor);
         tSet(this, attrs);
+    }
+
+    /**
+     * merge所有父类的attrs
+     * @param  {Function} class 需要mergeATTRS属性的类
+     * @param  {Object} attrs 需要merge的attrs
+     * @return {Object} attrs merge过所有父类ATTRS的attrs
+     * 注：如果子类和父类的key一样，那么覆盖
+     */
+    function mergeATTRS(cls,attrs){
+
+        var attrs = attrs || {};
+
+        if (cls.hasOwnProperty('ATTRS')) {
+            //如果子类拥有同名的属性,默认使用子类的,即不覆盖
+            FFF.core.mix(attrs,cls.ATTRS,false);
+        }
+
+        if (cls.superclass) {
+            mergeATTRS(cls.superclass,attrs);
+        };
+
+        return attrs;
     }
 
     /**
      * 设置私有属性
      * @param  {Object} obj 目标Object
-     * @param  {String} key 需要设置的属性名
-     * @param  {AnyObject} value 需要设置的属性值
-     * @return {null}
+     * @param  {Object} attrs 需要设置的属性对象
      */
     function tSet(obj, attrs) {
 

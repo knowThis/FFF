@@ -35,8 +35,10 @@ define(['base','FFF'], function(Base,FFF) {
 		return this;
 	}
 
-	Widget.attr = {
-		"boundingBox":undefined
+	Widget.ATTRS = {
+		boundingBox:{
+			value:'boundingBox'
+		}
 	}
 
 	return FFF.core.extend(Widget,Base);

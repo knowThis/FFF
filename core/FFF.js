@@ -35,7 +35,14 @@ define([], function() {
 
             subc.prototype = sp;
             subc.prototype.constructor = subc;
+            /**
+             * 存储父类原型链
+             */
             subc.prototype.super = spo;
+            /**
+             * 存储父类类属性
+             */
+            subc.superclass = superc;
 
             return subc;
         },
