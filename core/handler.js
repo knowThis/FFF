@@ -31,15 +31,18 @@ define(['FFF'], function(FFF) {
                 this.__events[evt]();
             }
         }
+    	return this;
     }
 
     /**
      * 注册事件，暂不支持多个handler绑定在一个事件上
      * @param  {String} evt     事件名
      * @param  {Function} handler 事件处理函数
+     * TODO:是否需要多事件绑定
      */
     Handler.prototype.on = function(evt, handler) {
         this.__events[evt] = handler;
+    	return this;
     }
 
     /**
@@ -50,6 +53,13 @@ define(['FFF'], function(FFF) {
     	if (this.__events.hasOwnProperty(evt)) {
     		delete(this.__events[evt]);
     	}
+    	return this;
+    }
+
+
+    Handler.prototype.offAll = function(){
+    	this.__events = {};
+    	return this;
     }
 
     return Handler

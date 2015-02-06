@@ -26,16 +26,16 @@ define([], function() {
                 throw new Error("extend failed, please check that all dependencies are included!");
             }
 
-            //extend
-            var sp = Object.create(superc.prototype);
+            //extend spo == superc prototype origin
+            var sp = Object.create(superc.prototype),spo = Object.create(superc.prototype);
             var rp = subc.prototype;
 
             //mix subc prototype
-            sp = FFF.core.mix(sp, rp, true);
+            FFF.core.mix(sp, rp, true);
 
             subc.prototype = sp;
             subc.prototype.constructor = subc;
-            subc.superclass = sp;
+            subc.prototype.super = spo;
 
             return subc;
         },
