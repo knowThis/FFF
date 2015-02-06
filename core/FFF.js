@@ -18,6 +18,8 @@ define([], function() {
          * @param  {Function} subc   子类
          * @param  {Function} superc 父类
          * @return {Function}        继承父类之后的子类
+         * TODO: 类属性是否需要继承?
+         * TODO: 需要加上一个callParent的判断，用于对父类的属性做修改
          */
         extend: function(subc, superc) {
             if (!superc || !subc) {
@@ -29,7 +31,7 @@ define([], function() {
             var rp = subc.prototype;
 
             //mix subc prototype
-            sp = FFF.core.mix(sp,rp,true);
+            sp = FFF.core.mix(sp, rp, true);
 
             subc.prototype = sp;
             subc.prototype.constructor = subc;
@@ -45,10 +47,10 @@ define([], function() {
          * @return {Object}           mix后的Object
          */
         mix: function(receiver, supplier, overwrite) {
-            Object.keys(supplier).forEach(function(o){
+            Object.keys(supplier).forEach(function(o) {
                 if (overwrite) {
                     receiver[o] = supplier[o];
-                }else{
+                } else {
                     if (!receiver.hasOwnProperty(o)) {
                         receiver[o] = supplier[o];
                     };
@@ -59,10 +61,12 @@ define([], function() {
         /**
          * 设置私有属性
          * @param  {Object} obj 目标Object
-         * @param  {key} key 需要设置的key
+         * @param  {String} key 需要设置的属性名
+         * @param  {AnyObject} value 需要设置的属性值
          * @return {null}
          */
-        tSet: function(obj, key) {
+        tSet: function(obj, key, value , changeHandler) {
+
             var defineProperty = ('defineProperty' in Object) ? Object.defineProperty :
                 function(object, name, descriptor) {
                     if (!Object.prototype.__defineGetter__) {
@@ -82,7 +86,7 @@ define([], function() {
             var getter = 'get' + cName;
             var delter = 'del' + cName;
 
-            var cacheVal = '';
+            var cacheVal = value || '';
 
             defineProperty(obj, key, {
                 configurable: true,
