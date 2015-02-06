@@ -65,7 +65,7 @@ define([], function() {
          * @param  {AnyObject} value 需要设置的属性值
          * @return {null}
          */
-        tSet: function(obj, key, value , changeHandler) {
+        tSet: function(obj, key, value) {
 
             var defineProperty = ('defineProperty' in Object) ? Object.defineProperty :
                 function(object, name, descriptor) {
