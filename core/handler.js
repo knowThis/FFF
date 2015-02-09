@@ -17,7 +17,7 @@ define(['FFF'], function(FFF) {
             value: newValue,
             preValue: oldValue
         });
-    }
+    };
 
     /**
      * 触发注册过的事件，暂时不抛出空事件的错误
@@ -33,7 +33,7 @@ define(['FFF'], function(FFF) {
             }
         }
     	return this;
-    }
+    };
 
     /**
      * 注册事件，暂不支持多个handler绑定在一个事件上
@@ -45,7 +45,7 @@ define(['FFF'], function(FFF) {
     Handler.prototype.on = function(evt, handler) {
         this.__events[evt] = handler;
     	return this;
-    }
+    };
 
     /**
      * 注销事件
@@ -54,10 +54,10 @@ define(['FFF'], function(FFF) {
      */
     Handler.prototype.off = function(evt) {
     	if (this.__events.hasOwnProperty(evt)) {
-    		delete(this.__events[evt]);
+    		delete this.__events[evt];
     	}
     	return this;
-    }
+    };
 
     /**
      * 注销所有事件
@@ -66,7 +66,7 @@ define(['FFF'], function(FFF) {
     Handler.prototype.offAll = function(){
     	this.__events = {};
     	return this;
-    }
+    };
 
     return Handler
 });

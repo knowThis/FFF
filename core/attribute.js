@@ -14,38 +14,38 @@ define(['FFF'], function(FFF) {
      */
     Attribute.prototype.__initAttr = function() {
         var attrs = mergeATTRS(this.constructor);
-        tSet(this, attrs);
-    }
+        addPrivates(this, attrs);
+    };
 
     /**
      * merge所有父类的attrs
-     * @param  {Function} class 需要mergeATTRS属性的类
+     * @param  {Function} cls 需要mergeATTRS属性的类
      * @param  {Object} attrs 需要merge的attrs
-     * @return {Object} attrs merge过所有父类ATTRS的attrs
+     * @return {Object} mixAttrs merge过所有父类ATTRS的attrs
      * 注：如果子类和父类的key一样，那么覆盖
      */
     function mergeATTRS(cls,attrs){
 
-        var attrs = attrs || {};
+        var mixAttrs = attrs || {};
 
         if (cls.hasOwnProperty('ATTRS')) {
             //如果子类拥有同名的属性,默认使用子类的,即不覆盖
-            FFF.core.mix(attrs,cls.ATTRS,false);
+            FFF.core.mix(mixAttrs,cls.ATTRS,false);
         }
 
         if (cls.superclass) {
-            mergeATTRS(cls.superclass,attrs);
-        };
+            mergeATTRS(cls.superclass,mixAttrs);
+        }
 
-        return attrs;
+        return mixAttrs;
     }
 
     /**
-     * 设置私有属性
+     * 添加私有属性
      * @param  {Object} obj 目标Object
      * @param  {Object} attrs 需要设置的属性对象
      */
-    function tSet(obj, attrs) {
+    function addPrivates(obj, attrs) {
 
         var defineProperty = ('defineProperty' in Object) ? Object.defineProperty :
             function(object, name, descriptor) {
@@ -86,8 +86,7 @@ define(['FFF'], function(FFF) {
             };
 
             obj[getter] = function() {
-                var val = Object.getOwnPropertyDescriptor(obj, key).get();
-                return val;
+                return Object.getOwnPropertyDescriptor(obj, key).get();
             };
 
             obj[delter] = function() {

@@ -15,42 +15,42 @@ define([], function() {
     FFF.core = {
         /**
          * [extend 继承方法]
-         * @param  {Function} subc   子类
-         * @param  {Function} superc 父类
+         * @param  {Function} subClass   子类
+         * @param  {Function} superClass 父类
          * @return {Function}        继承父类之后的子类
          * TODO: 类属性是否需要继承?
          * TODO: 需要加上一个callParent的判断，用于对父类的属性做修改
          */
-        extend: function(subc, superc) {
-            if (!superc || !subc) {
+        extend: function(subClass, superClass) {
+            if (!superClass || !subClass) {
                 throw new Error("extend failed, please check that all dependencies are included!");
             }
 
             //extend spo == superc prototype origin
-            var sp = Object.create(superc.prototype),spo = Object.create(superc.prototype);
-            var rp = subc.prototype;
+            var sp = Object.create(superClass.prototype),spo = Object.create(superClass.prototype);
+            var rp = subClass.prototype;
 
             //mix subc prototype
             FFF.core.mix(sp, rp, true);
 
-            subc.prototype = sp;
-            subc.prototype.constructor = subc;
+            subClass.prototype = sp;
+            subClass.prototype.constructor = subClass;
             /**
              * 存储父类原型链
              */
-            subc.prototype.super = spo;
+            subClass.prototype.super = spo;
             /**
              * 存储父类类属性
              */
-            subc.superclass = superc;
+            subClass.superclass = superClass;
 
-            return subc;
+            return subClass;
         },
         /**
          * [mix 混合两个Object的属性]
          * @param  {Object} receiver  接受supplier的属性
          * @param  {Object} supplier  提供属性给receiver
-         * @param  {Bool} overwrite 是否覆盖属性
+         * @param  {Boolean} overwrite 是否覆盖属性
          * @return {Object}           mix后的Object
          */
         mix: function(receiver, supplier, overwrite) {
@@ -60,9 +60,9 @@ define([], function() {
                 } else {
                     if (!receiver.hasOwnProperty(o)) {
                         receiver[o] = supplier[o];
-                    };
+                    }
                 }
-            })
+            });
             return receiver;
         },
         /**
@@ -71,6 +71,7 @@ define([], function() {
          * @param  {String} key 需要设置的属性名
          * @param  {AnyObject} value 需要设置的属性值
          * @return {null}
+         * TODO 无用方法?
          */
         tSet: function(obj, key, value) {
 
@@ -126,7 +127,7 @@ define([], function() {
 
             };
         }
-    }
+    };
 
     return FFF;
 
