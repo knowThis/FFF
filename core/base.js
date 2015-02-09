@@ -14,4 +14,4 @@ define(['FFF','attribute','handler'], function(FFF,Attribute,Handler) {
 
     return Base;
 
-})
+});
