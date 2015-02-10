@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #widgetA {
+            width: 100px;
+            height: 100px;
+            background-color: #333333;
+        }
+
+        #widgetB {
+            width: 100px;
+            height: 100px;
+            background-color: #842b18;
+        }
+
+        #widgetC {
+            width: 100px;
+            height: 100px;
+            background-color: #5fba57;
+        }
+    </style>
+</head>
+<body>
+<script src="../lib/require.js"></script>
+
+<!--widget a-->
+<div id="widgetA"></div>
+
+
+<div id="widgetB"></div>
+
+
+<div id="widgetC"></div>
+
+<script>
+
+    require.config({
+        paths: {
+            base: '../core/base',
+            attribute: '../core/attribute',
+            FFF: '../core/FFF',
+            handler: '../core/handler',
+            widget: '../core/widget',
+            slider: 'slider'
+        }
+    });
+
+    require(['slider'], function (Slider) {
+        var slider1 = new Slider({
+            id: 'widgetA'
+        });
+        var slider2 = new Slider({
+            id: 'widgetB'
+        });
+        var slider3 = new Slider({
+            id: 'widgetC'
+        });
+
+        slider1.renderUI();
+
+        slider2.renderUI();
+
+        slider3.renderUI();
+
+
+        slider1.trigger('loadData')
+
+    });
+
+</script>
+
+</body>
+</html>
