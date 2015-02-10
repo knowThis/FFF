@@ -10,9 +10,9 @@ define([], function() {
     F -> Fast
     F -> Front-end
      */
-    var FFF = {};
+    var Language = {};
 
-    FFF.core = {
+    Language.core = {
         /**
          * [extend 继承方法]
          * @param  {Function} subClass   子类
@@ -129,6 +129,6 @@ define([], function() {
         }
     };
 
-    return FFF;
+    return Language;
 
 });
