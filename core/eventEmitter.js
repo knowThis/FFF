@@ -2,17 +2,17 @@
  * Handler 类
  * 暂时放在Base文件中
  */
-define(['FFF'], function(FFF) {
+define([], function() {
 
-    function Handler() {
-        this.__events = {};
+    function EventEmitter() {
+        this.__events__ = {};
     }
 
     /**
      * 内部方法
      * 触发Attr变化的Event
      */
-    Handler.prototype.__fireAttrEvent = function(evt, newValue, oldValue) {
+    EventEmitter.prototype.__fireAttrEvent = function(evt, newValue, oldValue) {
         this.trigger(evt, {
             value: newValue,
             preValue: oldValue
@@ -24,9 +24,9 @@ define(['FFF'], function(FFF) {
      * @param  {String} evt 事件名
      * @return {Object} 实例对象
      */
-    Handler.prototype.trigger = function (evt) {
-        if (this.__events.hasOwnProperty(evt)) {
-            var evtVal = this.__events[evt];
+    EventEmitter.prototype.trigger = function (evt) {
+        if (this.__events__.hasOwnProperty(evt)) {
+            var evtVal = this.__events__[evt];
             if (arguments.length > 1) {
                 evtVal.handler.apply(evtVal.scope, arguments[1]);
             } else {
@@ -36,18 +36,15 @@ define(['FFF'], function(FFF) {
         return this;
     };
 
-
-
     /**
-     * 注册事件，暂不支持多个handler绑定在一个事件上
-     * @param evt 事件名
-     * @param handler 事件处理函数
-     * @param scope 作用域 默认为this
-     * @returns {Handler}
+     * 注册事件，暂不支持多个event绑定在一个事件上
+     * @param  {String} evt     事件名
+     * @param  {Function} event 事件处理函数
+     * @return {Object} 实例对象
      * TODO:是否需要多事件绑定
      */
-    Handler.prototype.on = function (evt, handler, scope) {
-        this.__events[evt] = {
+    EventEmitter.prototype.on = function(evt, handler,scope) {
+        this.__events__[evt] = {
             handler: handler,
             scope: scope || this
         };
@@ -59,9 +56,9 @@ define(['FFF'], function(FFF) {
      * @param  {String} evt 事件名
      * @return {Object} 实例对象
      */
-    Handler.prototype.off = function(evt) {
-    	if (this.__events.hasOwnProperty(evt)) {
-    		delete this.__events[evt];
+    EventEmitter.prototype.off = function(evt) {
+    	if (this.__events__.hasOwnProperty(evt)) {
+    		delete this.__events__[evt];
     	}
     	return this;
     };
@@ -70,10 +67,10 @@ define(['FFF'], function(FFF) {
      * 注销所有事件
      * @return {Object} 实例对象
      */
-    Handler.prototype.offAll = function(){
-    	this.__events = {};
+    EventEmitter.prototype.offAll = function(){
+    	this.__events__ = {};
     	return this;
     };
 
-    return Handler
+    return EventEmitter;
 });
