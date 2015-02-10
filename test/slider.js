@@ -1,4 +1,4 @@
-define(['FFF','widget'], function(FFF,widget) {
+define(['language','widget'], function(language,widget) {
 
     function WidgetA() {
         widget.apply(this, arguments);
@@ -29,6 +29,6 @@ define(['FFF','widget'], function(FFF,widget) {
 
 
 
-    return FFF.core.extend(WidgetA, widget);
+    return language.core.extend(WidgetA, widget);
 
 });
