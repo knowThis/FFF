@@ -41,7 +41,7 @@
         paths: {
             base: '../core/base',
             attribute: '../core/attribute',
-            FFF: '../core/FFF',
+            messageCenter: '../core/messageCenter',
             language: '../core/language',
             eventEmitter: '../core/eventEmitter',
             widget: '../core/widget',
@@ -49,18 +49,29 @@
         }
     });
 
-    require(['slider'], function (Slider) {
+    require(['slider', 'messageCenter'], function (Slider, mc) {
         var slider1 = new Slider({
             id: 'widgetA'
         });
 
+        var slider2 = new Slider({
+            id: 'widgetB'
+        });
+
         slider1.renderUI();
+        slider2.renderUI();
 
-        slider1.on('idChange',function(obj){
+        slider1.on('idChange', function (obj) {
             console.log(obj)
-        })
+        });
 
-        console.log(slider1.getId());
+        //console.log(slider1.getId());
+
+        setTimeout(function () {
+            mc.fire('hasData', {isfire: 'fire'});
+            mc.off('hasData');
+            mc.fire('hasData');
+        }, 2000);
 
     });
 

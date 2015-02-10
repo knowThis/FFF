@@ -1,4 +1,4 @@
-define(['language','widget'], function(language,widget) {
+define(['language','widget','messageCenter'], function(language,widget,mc) {
 
     function WidgetA() {
         widget.apply(this, arguments);
@@ -14,7 +14,11 @@ define(['language','widget'], function(language,widget) {
         //或者改造handler中的event处理模式
         me.on('loadData',function(){
             console.log(new Date().getTime());
-        })
+        });
+
+        mc.on(this,'hasData',function(source,data){
+            console.log(source.getId()+' is '+data.isfire);
+        });
     };
     WidgetA.prototype.bindUI = function() {
 
