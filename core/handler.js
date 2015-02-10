@@ -24,27 +24,34 @@ define(['FFF'], function(FFF) {
      * @param  {String} evt 事件名
      * @return {Object} 实例对象
      */
-    Handler.prototype.trigger = function(evt) {
+    Handler.prototype.trigger = function (evt) {
         if (this.__events.hasOwnProperty(evt)) {
+            var evtVal = this.__events[evt];
             if (arguments.length > 1) {
-                this.__events[evt](arguments[1]);
+                evtVal.handler.apply(evtVal.scope, arguments[1]);
             } else {
-                this.__events[evt]();
+                evtVal.handler.apply(evtVal.scope, []);
             }
         }
-    	return this;
+        return this;
     };
+
+
 
     /**
      * 注册事件，暂不支持多个handler绑定在一个事件上
-     * @param  {String} evt     事件名
-     * @param  {Function} handler 事件处理函数
-     * @return {Object} 实例对象
+     * @param evt 事件名
+     * @param handler 事件处理函数
+     * @param scope 作用域 默认为this
+     * @returns {Handler}
      * TODO:是否需要多事件绑定
      */
-    Handler.prototype.on = function(evt, handler) {
-        this.__events[evt] = handler;
-    	return this;
+    Handler.prototype.on = function (evt, handler, scope) {
+        this.__events[evt] = {
+            handler: handler,
+            scope: scope || this
+        };
+        return this;
     };
 
     /**
