@@ -6,8 +6,8 @@ define(['language','widget'], function(language,widget) {
 
 
     WidgetA.prototype.initialize = function() {
-
     };
+    
     WidgetA.prototype.renderUI = function() {
         var me = this;
         //TODO 此处需要任彬写的mc来处理
@@ -27,6 +27,17 @@ define(['language','widget'], function(language,widget) {
 
     };
 
+    WidgetA.ATTRS = {
+        name:{
+            value:"foo"
+        },
+        title:{
+            value:"bar"
+        },
+        id:{
+            value:"123"
+        }
+    }
 
 
     return language.core.extend(WidgetA, widget);

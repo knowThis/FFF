@@ -31,7 +31,7 @@ define([], function() {
             var rp = subClass.prototype;
 
             //mix subc prototype
-            FFF.core.mix(sp, rp, true);
+            Language.core.mix(sp, rp, true);
 
             subClass.prototype = sp;
             subClass.prototype.constructor = subClass;

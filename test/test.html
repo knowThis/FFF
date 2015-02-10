@@ -53,21 +53,14 @@
         var slider1 = new Slider({
             id: 'widgetA'
         });
-        var slider2 = new Slider({
-            id: 'widgetB'
-        });
-        var slider3 = new Slider({
-            id: 'widgetC'
-        });
 
         slider1.renderUI();
 
-        slider2.renderUI();
+        slider1.on('idChange',function(obj){
+            console.log(obj)
+        })
 
-        slider3.renderUI();
-
-
-        slider1.trigger('loadData')
+        console.log(slider1.getId());
 
     });
 

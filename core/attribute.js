@@ -5,14 +5,14 @@
 define(['language'], function(L) {
 
     function Attribute() {
-        this.__initAttr();
+        this.__initAttr__();
     }
 
     /**
      * 初始化所有属性 ATTRS
      * 注：如果extend中做过类属性的继承，那么此处将要改动
      */
-    Attribute.prototype.__initAttr = function() {
+    Attribute.prototype.__initAttr__ = function() {
         var attrs = mergeATTRS(this.constructor);
         addPrivates(this, attrs);
     };

@@ -2,7 +2,7 @@ define(['base', 'language'], function(Base, L) {
 
     function Widget() {
         Base.apply(this, arguments);
-        initWidget.call(this);
+        __initWidget__.apply(this,arguments);
     }
 
     /**
@@ -41,16 +41,34 @@ define(['base', 'language'], function(Base, L) {
     /**
      * 从父类开始调用所有子类的initialize方法
      * 这样initialize方法将成为所有控件的入口
+     * TODO:是否每一个initialize都需要传入参数
+     * 目前是都传入的
      */
-    function initWidget() {
+    function __initWidget__() {
         var initializers = [];
         var ctx = this;
+        var args = arguments[0];
         do {
             initializers.push(ctx.initialize);
-            ctx = ctx.super || {};
+            ctx = ctx.superclass || {};
         } while (ctx.constructor.prototype.hasOwnProperty('initialize'));
         for (var i = initializers.length - 1; i >= 0; i--) {
-            initializers[i]();
+            initializers[i].apply(this,arguments);
+            // if (i == 0 && arguments.length > 0) {
+            //     initializers[i].apply(this,arguments);
+            // }else{
+            //     initializers[i].apply(this);
+            // }
+        };
+
+        // 重置默认属性以及相关操作
+        if (typeof args === 'object') {
+            for(key in args){
+                if (this.constructor.ATTRS[key]) {
+                    var cName = key.charAt(0).toUpperCase() + key.substr(1);
+                    this['set'+cName](args[key]);
+                };
+            }
         };
     }
 
