@@ -2,7 +2,7 @@
  * Attribute处理类
  * 这里暂时放入Base
  */
-define(['FFF'], function(FFF) {
+define(['language'], function(L) {
 
     function Attribute() {
         this.__initAttr();
@@ -30,7 +30,7 @@ define(['FFF'], function(FFF) {
 
         if (cls.hasOwnProperty('ATTRS')) {
             //如果子类拥有同名的属性,默认使用子类的,即不覆盖
-            FFF.core.mix(mixAttrs,cls.ATTRS,false);
+            L.core.mix(mixAttrs,cls.ATTRS,false);
         }
 
         if (cls.superclass) {

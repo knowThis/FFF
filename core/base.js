@@ -1,4 +1,4 @@
-define(['FFF','attribute','eventEmitter'], function(FFF,Attribute,EventEmitter) {
+define(['language','attribute','eventEmitter'], function(L,Attribute,EventEmitter) {
 
     /**
      * FFF基础类,所有类都讲继承Base
@@ -8,8 +8,8 @@ define(['FFF','attribute','eventEmitter'], function(FFF,Attribute,EventEmitter) 
         EventEmitter.apply(this, arguments);
     }
 
-    FFF.core.mix(Base.prototype, Attribute.prototype, false);
-    FFF.core.mix(Base.prototype, EventEmitter.prototype, false);
+    L.core.mix(Base.prototype, Attribute.prototype, false);
+    L.core.mix(Base.prototype, EventEmitter.prototype, false);
 
 
     return Base;
