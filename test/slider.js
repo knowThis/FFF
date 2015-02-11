@@ -1,37 +1,33 @@
 define(['language','widget','messageCenter'], function(language,widget,mc) {
 
-    function WidgetA() {
+    function Slider() {
         widget.apply(this, arguments);
     }
 
 
-    WidgetA.prototype.initialize = function() {
+    Slider.prototype.initialize = function() {
     };
-    
-    WidgetA.prototype.renderUI = function() {
+
+    Slider.prototype.renderUI = function() {
         var me = this;
-        //TODO 此处需要任彬写的mc来处理
-        //或者改造handler中的event处理模式
-        me.on('loadData',function(){
-            console.log(new Date().getTime());
-        });
 
-        mc.on(this,'hasData',function(source,data){
-            console.log(source.getId()+' is '+data.isfire);
+
+        mc.on(me,'hasData',function(source,data){
+            console.log(source.getName()+' is '+data.isfire);
         });
     };
-    WidgetA.prototype.bindUI = function() {
+    Slider.prototype.bindUI = function() {
 
     };
 
-    WidgetA.prototype.syncUI = function() {
+    Slider.prototype.syncUI = function() {
 
     };
-    WidgetA.prototype.destructor = function() {
+    Slider.prototype.destructor = function() {
 
     };
 
-    WidgetA.ATTRS = {
+    Slider.ATTRS = {
         name:{
             value:"foo"
         },
@@ -44,6 +40,6 @@ define(['language','widget','messageCenter'], function(language,widget,mc) {
     }
 
 
-    return language.core.extend(WidgetA, widget);
+    return language.core.extend(Slider, widget);
 
 });

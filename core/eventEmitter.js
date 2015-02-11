@@ -28,9 +28,9 @@ define([], function() {
         if (this.__events__.hasOwnProperty(evt)) {
             var evtVal = this.__events__[evt];
             if (arguments.length > 1) {
-                evtVal.handler.apply(evtVal.scope, arguments[1]);
+                evtVal.handler.call(evtVal.scope, arguments[1]);
             } else {
-                evtVal.handler.apply(evtVal.scope, []);
+                evtVal.handler.call(evtVal.scope);
             }
         }
         return this;

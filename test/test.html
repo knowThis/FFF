@@ -51,26 +51,34 @@
 
     require(['slider', 'messageCenter'], function (Slider, mc) {
         var slider1 = new Slider({
+            name:'我是房子',
             id: 'widgetA'
         });
 
         var slider2 = new Slider({
+            name:'我是消防员',
             id: 'widgetB'
+        });
+
+
+        var slider3 = new Slider({
+            name:'我是救护车',
+            id: 'widgetC'
         });
 
         slider1.renderUI();
         slider2.renderUI();
+        slider3.renderUI();
+
 
         slider1.on('idChange', function (obj) {
-            console.log(obj)
+            console.log('id的改变:'+obj.value)
         });
 
-        //console.log(slider1.getId());
+        slider1.setId('我是房子么?');
 
         setTimeout(function () {
-            mc.fire('hasData', {isfire: 'fire'});
-            mc.off('hasData');
-            mc.fire('hasData');
+            mc.fire('hasData', {isfire: '我着火了..'});
         }, 2000);
 
     });
