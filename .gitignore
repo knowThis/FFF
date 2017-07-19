@@ -1,1 +1,5 @@
 ./mxc
+.idea/
+yarn.lock
+/node_modules/
+demo/node_modules
