@@ -56,6 +56,7 @@ define(['FFFBase/language', 'FFFBase/attribute', 'FFFBase/eventEmitter'], functi
                     value.parentNode.removeChild(value);
                 }
                 //如果是Widget实例
+                //TODO 如果ATTRS 中有父子关系的组件 需要先将该属性置为NULL
                 if (value.isWidget) {
                     value.destroy();
                     if (FFF) {
