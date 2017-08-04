@@ -5,7 +5,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var packageInfo = require('./package.json');
-
+var  HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var version = packageInfo.version;
 module.exports = {
@@ -13,7 +13,8 @@ module.exports = {
         index: './index.js'
     },
     output: {
-        filename: 'dist/FFF.zepto.' + version + '.min.js',
+        filename: 'FFF.zepto.[chunkhash:4].min.js',
+        path: path.resolve(__dirname, 'dist'),
         library: 'FFF',
         libraryTarget: 'this'
     },
@@ -47,14 +48,16 @@ module.exports = {
                     path.resolve(__dirname, "style")
                 ]
             },
+
         ],
     },
     plugins: [
-        // new webpack.ProvidePlugin({
-        //     $: 'zepto',
-        //     Zepto: 'zepto',
-        //     'window.Zepto': 'zepto'
-        // }),
-    ]
+        new HtmlWebpackPlugin({
+            title: 'My App',
+            filename: 'index.html',
+            template:'test/index.html',
+            chunks:['index']
+        })
+    ],
 
 };
